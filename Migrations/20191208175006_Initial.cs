@@ -44,6 +44,7 @@ namespace Safety4Children.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     Nome = table.Column<string>(nullable: true),
                     Sobrenome = table.Column<string>(nullable: true),
+                    UrlAvatar = table.Column<string>(nullable: true),
                     Discriminator = table.Column<string>(nullable: false),
                     Sexo = table.Column<char>(nullable: true),
                     Idade = table.Column<int>(nullable: true),
@@ -169,13 +170,13 @@ namespace Safety4Children.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Nome", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Sobrenome", "TwoFactorEnabled", "UserName", "Cpf" },
-                values: new object[] { 1, 0, "d7d50895-1e1c-4582-8bd1-6badd9daea7e", "UsuarioPai", "fulano.tal@teste.com", false, true, null, "Fulano", "FULANO.TAL@TESTE.COM", "FULANO.TAL@TESTE.COM", "AQAAAAEAACcQAAAAEEVjXvqjVsNgg//Kp2nmmIc8cVqwehn9NayYOAl6iqthSU3yClvT5iQDdDc4J5lKHg==", null, false, "KRV4CMQKAQCZGZYKSMRW3L7NIJ7CTS6C", "de Tal", false, "fulano.tal@teste.com", "71985694719" });
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Nome", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Sobrenome", "TwoFactorEnabled", "UrlAvatar", "UserName", "Cpf" },
+                values: new object[] { 1, 0, "d7d50895-1e1c-4582-8bd1-6badd9daea7e", "UsuarioPai", "fulano.tal@teste.com", false, true, null, "Fulano", "FULANO.TAL@TESTE.COM", "27996324590", "AQAAAAEAACcQAAAAEEVjXvqjVsNgg//Kp2nmmIc8cVqwehn9NayYOAl6iqthSU3yClvT5iQDdDc4J5lKHg==", "27996324590", false, "KRV4CMQKAQCZGZYKSMRW3L7NIJ7CTS6C", "de Tal", false, null, "27996324590", "71985694719" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Nome", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Sobrenome", "TwoFactorEnabled", "UserName", "Idade", "Sexo", "UsuarioPaiId" },
-                values: new object[] { 2, 0, "d7d50895-1e1c-4582-8bd1-6badd9daea7e", "UsuarioFilho", "sicrano.tal@teste.com", false, true, null, "Sicrano", "SICRANO.TAL@TESTE.COM", "SICRANO.TAL@TESTE.COM", "AQAAAAEAACcQAAAAEEVjXvqjVsNgg//Kp2nmmIc8cVqwehn9NayYOAl6iqthSU3yClvT5iQDdDc4J5lKHg==", null, false, "KRV4CMQKAQCZGZYKSMRW3L7NIJ7CTS6C", "de Tal", false, "sicrano.tal@teste.com", 0, 'M', 1 });
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Nome", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Sobrenome", "TwoFactorEnabled", "UrlAvatar", "UserName", "Idade", "Sexo", "UsuarioPaiId" },
+                values: new object[] { 2, 0, "d7d50895-1e1c-4582-8bd1-6badd9daea7e", "UsuarioFilho", "sicrano.tal@teste.com", false, true, null, "Sicrano", "SICRANO.TAL@TESTE.COM", "27996324591", "AQAAAAEAACcQAAAAEEVjXvqjVsNgg//Kp2nmmIc8cVqwehn9NayYOAl6iqthSU3yClvT5iQDdDc4J5lKHg==", "27996324591", false, "KRV4CMQKAQCZGZYKSMRW3L7NIJ7CTS6C", "de Tal", false, null, "27996324591", 0, 'M', 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

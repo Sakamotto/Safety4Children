@@ -9,7 +9,7 @@ using Safety4Children.Repository;
 namespace Safety4Children.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20191208171339_Initial")]
+    [Migration("20191208175006_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -161,6 +161,9 @@ namespace Safety4Children.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("UrlAvatar")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("UserName")
                         .HasColumnType("TEXT")
                         .HasMaxLength(256);
@@ -249,13 +252,14 @@ namespace Safety4Children.Migrations
                             LockoutEnabled = true,
                             Nome = "Sicrano",
                             NormalizedEmail = "SICRANO.TAL@TESTE.COM",
-                            NormalizedUserName = "SICRANO.TAL@TESTE.COM",
+                            NormalizedUserName = "27996324591",
                             PasswordHash = "AQAAAAEAACcQAAAAEEVjXvqjVsNgg//Kp2nmmIc8cVqwehn9NayYOAl6iqthSU3yClvT5iQDdDc4J5lKHg==",
+                            PhoneNumber = "27996324591",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "KRV4CMQKAQCZGZYKSMRW3L7NIJ7CTS6C",
                             Sobrenome = "de Tal",
                             TwoFactorEnabled = false,
-                            UserName = "sicrano.tal@teste.com",
+                            UserName = "27996324591",
                             Idade = 0,
                             Sexo = 'M',
                             UsuarioPaiId = 1
@@ -282,13 +286,14 @@ namespace Safety4Children.Migrations
                             LockoutEnabled = true,
                             Nome = "Fulano",
                             NormalizedEmail = "FULANO.TAL@TESTE.COM",
-                            NormalizedUserName = "FULANO.TAL@TESTE.COM",
+                            NormalizedUserName = "27996324590",
                             PasswordHash = "AQAAAAEAACcQAAAAEEVjXvqjVsNgg//Kp2nmmIc8cVqwehn9NayYOAl6iqthSU3yClvT5iQDdDc4J5lKHg==",
+                            PhoneNumber = "27996324590",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "KRV4CMQKAQCZGZYKSMRW3L7NIJ7CTS6C",
                             Sobrenome = "de Tal",
                             TwoFactorEnabled = false,
-                            UserName = "fulano.tal@teste.com",
+                            UserName = "27996324590",
                             Cpf = "71985694719"
                         });
                 });

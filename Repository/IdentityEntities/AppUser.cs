@@ -15,6 +15,7 @@ namespace Safety4Children.Repository.IdentityEntities
                 return $"{Nome} {Sobrenome}";
             }
         }
+        public string UrlAvatar { get; set; }
         public List<UserRole> UserRoles { get; set; }
     }
 }

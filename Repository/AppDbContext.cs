@@ -47,8 +47,9 @@ namespace Safety4Children.Repository
                         SecurityStamp = "KRV4CMQKAQCZGZYKSMRW3L7NIJ7CTS6C",
                         ConcurrencyStamp = "d7d50895-1e1c-4582-8bd1-6badd9daea7e",
                         LockoutEnabled = true,
-                        UserName = "fulano.tal@teste.com",
-                        NormalizedUserName = "FULANO.TAL@TESTE.COM",
+                        UserName = "27996324590",
+                        NormalizedUserName = "27996324590",
+                        PhoneNumber = "27996324590"
                     }
                 );
 
@@ -73,9 +74,10 @@ namespace Safety4Children.Repository
                         SecurityStamp = "KRV4CMQKAQCZGZYKSMRW3L7NIJ7CTS6C",
                         ConcurrencyStamp = "d7d50895-1e1c-4582-8bd1-6badd9daea7e",
                         LockoutEnabled = true,
-                        UserName = "sicrano.tal@teste.com",
-                        NormalizedUserName = "SICRANO.TAL@TESTE.COM",
-                        UsuarioPaiId = 1
+                        UserName = "27996324591",
+                        NormalizedUserName = "27996324591",
+                        UsuarioPaiId = 1,
+                        PhoneNumber = "27996324591"
                     }
                 );
         }

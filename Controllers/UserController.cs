@@ -24,26 +24,18 @@ namespace Safety4Children.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-        private readonly ILogger<WeatherForecastController> _logger;
         private readonly AppDbContext Db;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IConfiguration _config;
 
         public UserController(
-            ILogger<WeatherForecastController> logger,
             AppDbContext context,
             IConfiguration config,
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager
         )
         {
-            _logger = logger;
             Db = context;
             _userManager = userManager;
             _signInManager = signInManager;
@@ -64,11 +56,12 @@ namespace Safety4Children.Controllers
                     f.NomeCompleto,
                     f.Idade,
                     f.Sexo,
+                    f.PhoneNumber,
                     Pai = new
                     {
                         Id = f.UsuarioPaiId,
                         f.UsuarioPai.NomeCompleto,
-                        f.UsuarioPai.Email,
+                        f.UsuarioPai.PhoneNumber,
                         f.UsuarioPai.Cpf
                     }
                 })
@@ -81,7 +74,7 @@ namespace Safety4Children.Controllers
         {
             try
             {
-                var user = await _userManager.FindByEmailAsync(userLogin.Email);
+                var user = await _userManager.FindByNameAsync(userLogin.PhoneNumber);
 
                 if (user != null)
                 {
@@ -89,7 +82,7 @@ namespace Safety4Children.Controllers
 
                     if (result.Succeeded)
                     {
-                        var appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.Email.ToUpper() == userLogin.Email.ToUpper());
+                        var appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.PhoneNumber.ToUpper() == userLogin.PhoneNumber);
                         return Ok(GenerateJWToken(appUser).Result);
                     }
                 }
@@ -141,7 +134,7 @@ namespace Safety4Children.Controllers
                 sucesso = true,
                 token = tokenHandler.WriteToken(token),
                 tokenDescriptor.Expires,
-                (user as UsuarioPai).Nome,
+                user.NomeCompleto,
                 user.Email,
                 // TipoUsuario = (user is UsuarioPaciente) ? 0 : (user is UsuarioProfissional) ? 1 : 2
             };
