@@ -9,7 +9,7 @@ using Safety4Children.Repository;
 namespace Safety4Children.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20191208145611_Initial")]
+    [Migration("20191208171339_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -132,6 +132,9 @@ namespace Safety4Children.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Nome")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("TEXT")
                         .HasMaxLength(256);
@@ -150,6 +153,9 @@ namespace Safety4Children.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("SecurityStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Sobrenome")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -215,14 +221,52 @@ namespace Safety4Children.Migrations
                     b.ToTable("AspNetUserRoles");
                 });
 
+            modelBuilder.Entity("Safety4Children.Entities.UsuarioFilho", b =>
+                {
+                    b.HasBaseType("Safety4Children.Repository.IdentityEntities.AppUser");
+
+                    b.Property<int>("Idade")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<char>("Sexo")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UsuarioPaiId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasIndex("UsuarioPaiId");
+
+                    b.HasDiscriminator().HasValue("UsuarioFilho");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "d7d50895-1e1c-4582-8bd1-6badd9daea7e",
+                            Email = "sicrano.tal@teste.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = true,
+                            Nome = "Sicrano",
+                            NormalizedEmail = "SICRANO.TAL@TESTE.COM",
+                            NormalizedUserName = "SICRANO.TAL@TESTE.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEVjXvqjVsNgg//Kp2nmmIc8cVqwehn9NayYOAl6iqthSU3yClvT5iQDdDc4J5lKHg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "KRV4CMQKAQCZGZYKSMRW3L7NIJ7CTS6C",
+                            Sobrenome = "de Tal",
+                            TwoFactorEnabled = false,
+                            UserName = "sicrano.tal@teste.com",
+                            Idade = 0,
+                            Sexo = 'M',
+                            UsuarioPaiId = 1
+                        });
+                });
+
             modelBuilder.Entity("Safety4Children.Entities.UsuarioPai", b =>
                 {
                     b.HasBaseType("Safety4Children.Repository.IdentityEntities.AppUser");
 
                     b.Property<string>("Cpf")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Nome")
                         .HasColumnType("TEXT");
 
                     b.HasDiscriminator().HasValue("UsuarioPai");
@@ -236,15 +280,16 @@ namespace Safety4Children.Migrations
                             Email = "fulano.tal@teste.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
+                            Nome = "Fulano",
                             NormalizedEmail = "FULANO.TAL@TESTE.COM",
                             NormalizedUserName = "FULANO.TAL@TESTE.COM",
                             PasswordHash = "AQAAAAEAACcQAAAAEEVjXvqjVsNgg//Kp2nmmIc8cVqwehn9NayYOAl6iqthSU3yClvT5iQDdDc4J5lKHg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "KRV4CMQKAQCZGZYKSMRW3L7NIJ7CTS6C",
+                            Sobrenome = "de Tal",
                             TwoFactorEnabled = false,
                             UserName = "fulano.tal@teste.com",
-                            Cpf = "71985694719",
-                            Nome = "Fulano de Tal"
+                            Cpf = "71985694719"
                         });
                 });
 
@@ -295,6 +340,15 @@ namespace Safety4Children.Migrations
                     b.HasOne("Safety4Children.Repository.IdentityEntities.AppUser", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Safety4Children.Entities.UsuarioFilho", b =>
+                {
+                    b.HasOne("Safety4Children.Entities.UsuarioPai", "UsuarioPai")
+                        .WithMany("Filhos")
+                        .HasForeignKey("UsuarioPaiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

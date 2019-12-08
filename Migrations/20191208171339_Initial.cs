@@ -42,13 +42,23 @@ namespace Safety4Children.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
                     Nome = table.Column<string>(nullable: true),
+                    Sobrenome = table.Column<string>(nullable: true),
+                    Discriminator = table.Column<string>(nullable: false),
+                    Sexo = table.Column<char>(nullable: true),
+                    Idade = table.Column<int>(nullable: true),
+                    UsuarioPaiId = table.Column<int>(nullable: true),
                     Cpf = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_AspNetUsers_UsuarioPaiId",
+                        column: x => x.UsuarioPaiId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -159,8 +169,13 @@ namespace Safety4Children.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "Cpf", "Nome" },
-                values: new object[] { 1, 0, "d7d50895-1e1c-4582-8bd1-6badd9daea7e", "UsuarioPai", "fulano.tal@teste.com", false, true, null, "FULANO.TAL@TESTE.COM", "FULANO.TAL@TESTE.COM", "AQAAAAEAACcQAAAAEEVjXvqjVsNgg//Kp2nmmIc8cVqwehn9NayYOAl6iqthSU3yClvT5iQDdDc4J5lKHg==", null, false, "KRV4CMQKAQCZGZYKSMRW3L7NIJ7CTS6C", false, "fulano.tal@teste.com", "71985694719", "Fulano de Tal" });
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Nome", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Sobrenome", "TwoFactorEnabled", "UserName", "Cpf" },
+                values: new object[] { 1, 0, "d7d50895-1e1c-4582-8bd1-6badd9daea7e", "UsuarioPai", "fulano.tal@teste.com", false, true, null, "Fulano", "FULANO.TAL@TESTE.COM", "FULANO.TAL@TESTE.COM", "AQAAAAEAACcQAAAAEEVjXvqjVsNgg//Kp2nmmIc8cVqwehn9NayYOAl6iqthSU3yClvT5iQDdDc4J5lKHg==", null, false, "KRV4CMQKAQCZGZYKSMRW3L7NIJ7CTS6C", "de Tal", false, "fulano.tal@teste.com", "71985694719" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Nome", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Sobrenome", "TwoFactorEnabled", "UserName", "Idade", "Sexo", "UsuarioPaiId" },
+                values: new object[] { 2, 0, "d7d50895-1e1c-4582-8bd1-6badd9daea7e", "UsuarioFilho", "sicrano.tal@teste.com", false, true, null, "Sicrano", "SICRANO.TAL@TESTE.COM", "SICRANO.TAL@TESTE.COM", "AQAAAAEAACcQAAAAEEVjXvqjVsNgg//Kp2nmmIc8cVqwehn9NayYOAl6iqthSU3yClvT5iQDdDc4J5lKHg==", null, false, "KRV4CMQKAQCZGZYKSMRW3L7NIJ7CTS6C", "de Tal", false, "sicrano.tal@teste.com", 0, 'M', 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -187,6 +202,11 @@ namespace Safety4Children.Migrations
                 name: "IX_AspNetUserRoles_RoleId",
                 table: "AspNetUserRoles",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_UsuarioPaiId",
+                table: "AspNetUsers",
+                column: "UsuarioPaiId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",

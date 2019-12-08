@@ -51,10 +51,28 @@ namespace Safety4Children.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<UsuarioPai> Get()
+        public JsonResult Get()
         {
-            var usuariosPai = Db.Set<UsuarioPai>().ToArray();
-            return usuariosPai;
+            var usuariosFilho = Db.Set<UsuarioFilho>()
+                .Include(f => f.UsuarioPai)
+                .ToArray();
+
+            return new JsonResult(usuariosFilho
+                .Select(f => new
+                {
+                    f.Id,
+                    f.NomeCompleto,
+                    f.Idade,
+                    f.Sexo,
+                    Pai = new
+                    {
+                        Id = f.UsuarioPaiId,
+                        f.UsuarioPai.NomeCompleto,
+                        f.UsuarioPai.Email,
+                        f.UsuarioPai.Cpf
+                    }
+                })
+            );
         }
 
         [HttpPost("Login")]
