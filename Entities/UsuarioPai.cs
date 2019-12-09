@@ -6,6 +6,7 @@ namespace Safety4Children.Entities
     public class UsuarioPai : AppUser
     {
         public string Cpf { get; set; }
+
         public ICollection<UsuarioFilho> Filhos { get; set; }
     }
 }

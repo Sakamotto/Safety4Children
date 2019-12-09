@@ -7,7 +7,9 @@ namespace Safety4Children.Repository.IdentityEntities
     public class AppUser : IdentityUser<int>
     {
         public string Nome { get; set; }
+
         public string Sobrenome { get; set; }
+
         [NotMapped]
         public string NomeCompleto {
             get
@@ -15,7 +17,11 @@ namespace Safety4Children.Repository.IdentityEntities
                 return $"{Nome} {Sobrenome}";
             }
         }
+
+        public string Telefone { get; set; }
+
         public string UrlAvatar { get; set; }
+
         public List<UserRole> UserRoles { get; set; }
     }
 }
